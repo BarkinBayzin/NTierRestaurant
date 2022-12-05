@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C75C8614-93E0-4A57-B0B5-4DFF42A79AE2}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation.txt = Documentation.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTierRestaurant.MODEL", "NTierRestaurant.MODEL\NTierRestaurant.MODEL.csproj", "{39D02ED0-0531-4E0F-802F-9A3863CEE5B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTierRestaurant.DAL", "NTierRestaurant.DAL\NTierRestaurant.DAL.csproj", "{11963037-35F7-412D-9A29-545D469C3E17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTierRestaurant.BLL", "NTierRestaurant.BLL\NTierRestaurant.BLL.csproj", "{1DD6204D-EBC7-4165-8B8A-315CDF22E18D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTierRestaurant.MAP", "NTierRestaurant.MAP\NTierRestaurant.MAP.csproj", "{73A1FAE6-B83D-4AF8-83EB-13F79F6CE310}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NTierRestaurant.WINUI", "NTierRestaurant.WINUI\NTierRestaurant.WINUI.csproj", "{F1010D5F-A514-4781-848A-3AFF9D716BBF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39D02ED0-0531-4E0F-802F-9A3863CEE5B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39D02ED0-0531-4E0F-802F-9A3863CEE5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39D02ED0-0531-4E0F-802F-9A3863CEE5B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39D02ED0-0531-4E0F-802F-9A3863CEE5B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11963037-35F7-412D-9A29-545D469C3E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11963037-35F7-412D-9A29-545D469C3E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11963037-35F7-412D-9A29-545D469C3E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11963037-35F7-412D-9A29-545D469C3E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DD6204D-EBC7-4165-8B8A-315CDF22E18D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DD6204D-EBC7-4165-8B8A-315CDF22E18D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DD6204D-EBC7-4165-8B8A-315CDF22E18D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DD6204D-EBC7-4165-8B8A-315CDF22E18D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73A1FAE6-B83D-4AF8-83EB-13F79F6CE310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73A1FAE6-B83D-4AF8-83EB-13F79F6CE310}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73A1FAE6-B83D-4AF8-83EB-13F79F6CE310}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73A1FAE6-B83D-4AF8-83EB-13F79F6CE310}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1010D5F-A514-4781-848A-3AFF9D716BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1010D5F-A514-4781-848A-3AFF9D716BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1010D5F-A514-4781-848A-3AFF9D716BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1010D5F-A514-4781-848A-3AFF9D716BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E020C9B6-2E3E-4850-93F2-7BD3F81314F2}
+	EndGlobalSection
+EndGlobal

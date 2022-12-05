@@ -1,0 +1,357 @@
+﻿
+Architectural Pattern (Mimari Patternle)
+
+Architectural Pattern'ler, bir projenin sistematik işleyişinden(çalışma mekanizmasından, sistemn içerisiindeki iş akışiından) sorumludur. Projenin tüm çalışma mantığı ve sistemsel işleyişi ile ilgilenen bir şablondur. Bozuldukları zaman proje çöker
+
+Design Patternler ise, kesinlikle bir projenin sistematik işleyişi ile ilgilenmez. Proje içetisinden çıkardığım zaman proje çökmez. Ancak performansı ciddi ölçüde kaybedilir. Projenin kurulumana bir katkıları yoktur. Ancak mimari patternler ile uyum sağlamaları gerekir ki asıl verimli bir şekilde performansı arttırabilsin.
+
+_____________________________________________________________________________
+
+* Yönetilibelirlik
+* Ekip Çalışması
+* Performans
+
+Açısından bütün sorumlulukları tek tek propjelere ayırdığımız mimarilere Layered(Katmanlı) Architecture Pattern denir.
+
+Bunlardan N-Tier Architectural Patternler bütün katmanların bağımsız olması prensibini uygulayarak ciddi ölçüde esneklik sağlar..
+Tek bir projede hemn veritabanı hem tasarım hem de classların tutulması bir hata durumnda projenizin esnekliğini ciddi ölçüde kısıtlayacaktır.
+Ancak bütün görevler kendi sorumluluklarını uygulayan ayrı projelerde tutuluyorsa daha fazla esneklik kazanıp aynı zamanda hataya daha hızlı ve kolay şekikde müdahele edilebilir ve performans kazanılabilir ve aynı zamanda ekip üyeleri farklı noktalardan kolayca çalışabilirler..
+
+Katmanlı mimari kullanmak için aklınızdaki projeyi görev yapacak ayrı ayrı parçalara ayırmalısınız..
+Projenizin bütün halini bölerek yönetmeye çalıştığınızda ve her projeye görevlerini yazdığınızda bir katmanlı mimari uygulamış olursunuz.
+
+Katmanlı Mimari geleneksel olarak 3 katmandan oluşur(Ancak projemizi daha fazla bölmek istediğimizde bu sayının bir limiti yoktur.)
+
+Bir katmanlı mimaride olması gereken katmanlar :
+
+* DAL (Data Access Layer) - Veri Erişim Katmanı :
+Projenizin sadece veritabanı erişimi ile ilgilenecek olan kısmıdır. DBFirst yönteminde sadece veritabanı yansıması almayı sağlarken, CodeFirst'te sorumluluğun ayrılması tek bir katmanla mümkün değildir. Dolayısıyla CF yöntemlerinde yaratacağınız Context sınıfının ayrı bir yerde tutulması gerekir..
+
+DbFirst'te bu katmanın görevi hem veritabnı sınıfının hem Entity'leri hem Enum'ları tutmak olduğu için NTier'in getirdiği esneklik DBFirst'te biraz azalır.
+
+* BLL (Business Logic Layer) - İş Mantığı Katmanı (Projeminiz Beyni) :
+Eğer bir frameworkun sizze sunduğu metotları özelleştirmek(en sağlıklısıdır..) isterseniz veya ek olarak kendi meottlarınızı açmak isterseniz ve bu metotlar tüm her yerde kullanılacak metotlar olacaksa/ortak bir sınıf yaratmak isterseniz bu tarz yapıları bu katmanda toplarsınız.
+Aynı zamanda BLL katmanı tasarım patternlerini(Design Patterns) tutup onların kullanılmasını sağlayan katmandır. (Singleton, GenericRepository, Builder, Factory, Abstract Factory, Visitor, Facade) patternleri bu katmanda kullanılır. Önemli Interface'ler de bu katmanda durur..
+
+* Presentation (UI - User Interface) - Sunum/Kullanıcı Arayüzü:
+Tasarım arayüzünüzdür. 
+Kullanıcı burayı görür. 
+Çalışabilen tek katmandır.(API Hariç)
+Diğer katmanlar DLL olarak algılanacktır.
+Burası sayesinde programınız çalışır ve kullanılabilir..
+
+_____________________________________________________________________________
+
+____________________Code First Yönteminde N-Tier Architecture________________
+
+* DAL : Veri Tabanına erişimi sağlayacağımız alan.
+* MODEL: Tablo olarak class'larımızı tutacak katmandır.
+* MAP : Tablo olarak class'lırınız ayarlarının yapıldığı katmandır.
+* BLL : İş Mantığı
+* UI/Presentation
+
+_____________________________________________________________________________
+
+Katmanlı Mimaride Önemli Kurallar Vardır:
+
+* Eğer bir katman başka bir katmandan referans alıyorsa o yere referans veremez. Bu durum illa isteniyorsa ortak yapıların kullanılabileceği ara bir katman oluşturulur.
+
+* Eğer bir katmandan referans almışşanız bu, o katmanın da referanslarını aldığınız anlamına gelmez. Sizin referans alcağınız katmanları ayrı ayrı almanız gerekir. (BLL içerisinde DAL'ın referansını barındırıyorsa ve DAL'da Entity Framework referansı varsa yaptığınız işlem sşizin BLL katmanınıza otomatik olarak EF'un geleceği anlamına gelmez.)
+
+* Bir projenin BLL, DAL, MODEL katmanları sadece bir tane olabilir. Ancak UI katmanı birden fazla olabilir..
+
+_____________________________________________________________________________
+_____________________________  PROJE ADIMLARI   ________________________
+_____________________________________________________________________________
+
+* DAL : Veri Tabanına erişimi sağlayacal.
+* MODEL: Tablo olarak class'larımızı tutacak katmandır.
+* MAP : Tablo olarak class'lırınız ayarlarının yapıldığı katmandır.
+* BLL : İş Mantığı
+* UI:
+
+UI ile DAL'ı birbirine direkt oalrak kesilikle bağlamamalıyız.
+Teknik olarka bir sorun çıkarmaz, yine yapılabilir ama ileri seviyede bir güvenlik açığı yaratmış oluruz diretk ilişkilendirirsek.
+
+* İlk başta Visual Studio'dan bir Blank Solution açılır
+
+* Öncelikle MODEL, DAL, BLL, UI katmanları açılır. (UI katmanı haricindikleri Class Library(.NET Framework) projesi olarak açılır) UI Katmanı hangi display'i istiyorsanız o şekilde açılır. Bu projede Winfows Form olarak seçilmiştir.
+
+!!!!!!!! UI Katmanı set as start up project olarak ayarlanmak zorundadır.!!!!!
+
+* Solution'a sağ tıklanarak Add New Project denir ve Class Library (.Net Framework) platformunda bir proje açılır.
+
+* Aynı işlem uygulanarak DAL katmanı açılır.
+
+* Aynı işlem uygulanarak MAP katmanı açılır.
+
+* Aynı işlem uygulanarak BLL katmanı açılır.
+
+* Windows Form Application platformunda bir UI katmanı açılır.
+
+* Açtığınız NTierRestaurant.WINUI katmanı set as start up olarark ayarlayın.
+Bunu yapmamızın bir nedeni projemizin buradan başlayacak olmasıdır. Bir başka nedesi ise App.config dosyasının nereden algılacağını yapıya bildirmektir.
+
+* Entity Framework kütüphanesi WINUI katmanına indiriyoruz. Sonra WINUI'in App.config kısmında connection string'inizi ekleyiniz.
+
+	<connectionStrings>
+		<add connectionString="server=.\\SQLEXPRESS;database=NTierRestaurantDB;integrated security=true;" providerName="System.Data.SqlClient" name="MyConnection"/>
+	</connectionStrings>
+
+_____________________________ MODEL KATMANI ___________________________
+
+Bu katmanda veritabanında tabloya dönüşecek olan class'larımız tutulur..
+Classları açmaya başlıyoruz
+
+_____________________________ MAP KATMANI ___________________________
+
+* Map katmanına veritabanı ayarlamarının yapılabilmesi için Entity Framework kütüphanesi indirilir.
+
+* MAP Katmanı, MODEL Katmanındaki tablo olacak sınfılarımı kullanacağı için o katmanı referans almak zorundadır. Dolasıyla bu katmana MODEL katmanından referans vermemiz gerekir.
+
+* Bu işlemlerden sonra Options dosyası açılıp MAP içeriisne, bunları farklı bir yapıya alıyoruz.
+
+* İçerisine BaseMap isimli bir sınıf oluşturuyoruz. Bu BaseMap sınıfımız biziöm ortak ayarlarmalarını yapmamızı sağlayacak sınıftır(her sınıfta bulunan prop'ların isimlerinin, tiplerinin vs değiştirilmesi).
+Bu ayarlamaları hangi sınıfa göre yapacağını bilmesi gerekir. Çünkü her ne kadar hangi prop'larını ayarlayacğını bilsede bu proplar birden fazla sınfıta bulunmaktadır. Dolasıyla bu ayarı hangi sınıf için yapabileceğini anlayabilmesi açısından BaseMap sınıfı generic tipte yaratılır(BaseMap<T>)..Generi tip demek sınıf tetiklendiğinde hangi tip için işlem yapacağını esnek bir şekilde verebilmek demektir.. Yani BaseMap'ten miras alındığında BaseMap'in T'si istenen dipe dönüştürülebilir..
+  Tabii ki BaseMap aldığı bu tipi ayarlamaları yapabilmek için EF kütüphanesinde ayarlamalarla ilgilenen bir sınıfa göndermek zorudadır.(bu sınıf BaseMapin miras aldığı EntityTypeConfiguration sınıfıdır. Bu sınıf da kendisi genecir olan bir sınıftır. Dolayısıyla BaseMap generic tipi belirlendiği zaman bu tipi EntityTypeConfiguration da tanır.)
+
+  * BaseMap Ayarlamaları Yapılır.
+
+  * Burada AppUser sınıfımız, bizim önceden BaseMap'te yaptığımız ayarlamaları almak zorundadır. Bu yüzden BaseMap'ten miras alır. Ancak BaseMap generic tip alıp ayarlamaları bu tip'e göre yaptığı için miras verirken generic belirlemek zorundayız. Generic Tipi'nin de AppUser olarak belirleyerek bütün property'lerin AppUser için ayarlanmasını sağlıyoruz.
+
+  * ProfileMap sınıfımız açıyoruz, Options dosyası içerisine aynı şekilde.
+
+  * OrderMap sınıfımız açıyoruz, Options dosyası içerisine aynı şekilde.
+
+  * OrderProductMap sınıfımız açıyoruz, Options dosyası içerisine aynı şekilde.
+
+  * ProductMap sınıfımız açıyoruz, Options dosyası içerisine aynı şekilde.
+
+  * ShipperMap sınıfımız açıyoruz, Options dosyası içerisine aynı şekilde.
+
+_____________________________ DAL KATMANI ___________________________
+
+* NTierRestaurant.DAL'a sağ tıklayıp Manage Nuget Packages'tan EF kütüphanesini buraya da indiriyoruz. (MODEL dışında tüm katmanlara bu kütüphaneyi indiriyoruz)
+  MODEL'den bütün classları kendimiz yararttığımız için bu katmana indirme gereksinimi duymuyoruz.
+
+  * DAL bizim classlarımız Tablo yapacağı için referans alması gerekir.
+  * Bunun için DAL'a MODEL'den ve MAP'ten referans veriyoruz.
+
+  * Context klasörümüzü DAL'ın içerisinde oluştuyoruz.
+  * Context'in içerisinde MyContext class'ımız oluşturuyoruz.
+  * DbContext'i namespace'e ekelyerek sınıfımıza miras veriyoruz !!
+
+  * OnModelCreating methodu override edilerek Map Ctor'ı tetiklenir.. 
+  * DbSet'ler yazılır..
+
+
+_____________________________ BLL KATMANI ___________________________
+
+ * Öncelikle EF kütüphanesini indiriyoruz.
+ * MODEL, DAL katmanlarından referans alınır.
+ * Singleton Pattern'i burada yapacağımız için MyContext'in olduğu yerden katman referansı almak zorundadır.
+
+ * Singleton Pattern instance alınma durumunu yaratıyoruz.
+
+  public class DBTool
+    {
+        static MyContext _dbInstance;
+        public static MyContext DbInstance
+        {
+            get
+            {
+                if (_dbInstance == null) _dbInstance = new MyContext();
+
+                return _dbInstance;
+            }
+        }
+    }
+
+    * GenericRepository için Interface'imizi oluşturuyoruz.
+
+    * BaseRep içerisine BaseRepository adında class oluşturuyoruz.
+
+     public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
+    {
+
+    }
+
+    IRepository üzerine gelip ctrl + . kombinasyonu ile Interface'mizi implement ediyoruz
+
+    Any metodunu düzenliyoruz 
+
+public bool Any(Expression<Func<T, bool>> exp) 
+
+        { 
+
+            return db.Set<T>().Any(exp); 
+
+        } 
+
+ 
+
+Delete Metodunu düzenliyoruz 
+
+public void Delete(T item) 
+
+        { 
+
+            item.Status = DataStatus.Deleted; 
+
+            item.DeletedDate = DateTime.Now; 
+
+            Save(); 
+
+        } 
+
+ 
+
+Destroy metodunu düzenliyoruz.. 
+
+public void Destroy(T item) 
+
+        { 
+
+            db.Set<T>().Remove(item); 
+
+            Save(); 
+
+        } 
+
+ 
+
+Find metodunu düzenliyoruz… 
+
+public T Find(int id) 
+
+        { 
+
+            return db.Set<T>().Find(id); 
+
+        } 
+
+ 
+
+Ortalık karışmasın where metodunu düzenliyoruz 
+
+public List<T> Where(Expression<Func<T, bool>> exp) 
+
+        { 
+
+            return db.Set<T>().Where(exp).ToList(); 
+
+        } 
+
+ 
+
+GetActives metodunu düzenliyoruz… 
+
+public List<T> GetActives() 
+
+        { 
+
+            return Where(x => x.Status == DataStatus.Inserted); 
+
+        } 
+
+ 
+
+GetAll metodunu …. 
+
+public List<T> GetAll() 
+
+        { 
+
+            return db.Set<T>().ToList(); 
+
+        } 
+
+ 
+
+GetDefault metodunu düzenliyoruz.. 
+
+public List<T> GetAll() 
+
+        { 
+
+            return db.Set<T>().ToList(); 
+
+        } 
+
+ 
+
+GetPassive metodunu düzenliyoruz.. 
+
+public List<T> GetPassives() 
+
+        { 
+
+            return Where(x => x.Status == DataStatus.Deleted); 
+
+        } 
+
+ 
+
+GetUpdate metodunu düzenliyoruz.. 
+
+public List<T> GetUpdateds() 
+
+        { 
+
+            return Where(x => x.Status == DataStatus.Updated); 
+
+        } 
+
+ 
+
+Select metodunu düzenliyoruz.. 
+
+public object Select(Expression<Func<T, object>> exp) 
+
+        { 
+
+            return db.Set<T>().Select(exp).ToList(); 
+
+        } 
+
+ 
+
+Update metodunu düzenliyoruz… 
+
+Önce güncellenecek verinin veritabanından yakalanması lazım 
+
+Sonra buraya gelen argümanın verilerinin komple veritabanındaki orjinal verilere replace edilmesi lazım(değiştirilmesi lazım) 
+
+ 
+
+public void Update(T item) 
+
+        { 
+
+            //Önce güncellenecek verinin veritabanından yakalanması lazım 
+
+            //Sonra buraya gelen argümanın verilerinin komple veritabanındaki orjinal verilere replace edilmesi lazım(değiştirilmesi lazım) 
+
+            T guncellenecek = Find(item.ID);//Burada parametremizin ID'sinden güncellenecek veriyi buldum. 
+
+ 
+
+            //db.Entry => bu ifade, Database'inizde var olan bir bilgi için güncelleme yapılacağını belirtir. 
+
+ 
+
+            db.Entry(guncellenecek).CurrentValues.SetValues(item);//Bu ifadede dediğimiz şey, db'ye bir güncelleme girişi var.. Bu güncellenecek nesnesi üzerinden yapılacak. Yakalanan nesnenin mevcut değerleri(henüz değiştirilmemiş olan Sql'deki orjinal değerleri) item'dakikelere (C# tarafında değişik olan bilgilere) set edilsin.. (ayarlansın) 
+
+            Save(); 
+
+        } 
+
+
+   * ConcRep'e giderek CategoryRepository Class'ı oluşturuyoruz..
+
+    public class CategoyRepository:BaseRepository<Category>
+    {
+
+    }
+
+   * Bütün classlarımız aynı şekilde miras vererek oluşturuyoruz
