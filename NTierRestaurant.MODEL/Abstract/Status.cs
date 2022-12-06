@@ -8,6 +8,6 @@ namespace NTierRestaurant.MODEL.Abstract
 {
     public enum Status
     {
-        Active = 1, Modified, Passive
+       Null = 0, Active = 1, Modified, Passive
     }
 }

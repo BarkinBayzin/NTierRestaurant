@@ -9,9 +9,14 @@ namespace NTierRestaurant.MODEL.Abstract
 {
     public abstract class BaseEntity
     {
+        public BaseEntity()
+        {
+            CreatedDate = DateTime.Now;
+            Status = Status.Active;
+        }
         [Key]
         public int Id { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate{ get; set; }
         public DateTime? DeletedDate { get; set; }
         public string CreatedBy { get; set; }

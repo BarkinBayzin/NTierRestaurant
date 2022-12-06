@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NTierRestaurant.BLL.DesignPatterns.GenericRepositoryPattern.ConcRep
 {
-    public class CategoyRepository:BaseRepository<Category>
+    public class CategoryRepository:BaseRepository<Category>
     {
 
     }

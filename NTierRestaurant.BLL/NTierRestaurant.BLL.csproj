@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="DesignPatterns\GenericRepositoryPattern\BaseRep\BaseRepository.cs" />
     <Compile Include="DesignPatterns\GenericRepositoryPattern\ConcRep\AppUserRepository.cs" />
-    <Compile Include="DesignPatterns\GenericRepositoryPattern\ConcRep\CategoyRepository.cs" />
+    <Compile Include="DesignPatterns\GenericRepositoryPattern\ConcRep\CategoryRepository.cs" />
     <Compile Include="DesignPatterns\GenericRepositoryPattern\ConcRep\OrderProductRepository.cs" />
     <Compile Include="DesignPatterns\GenericRepositoryPattern\ConcRep\OrderRepository.cs" />
     <Compile Include="DesignPatterns\GenericRepositoryPattern\ConcRep\ProductRepository.cs" />

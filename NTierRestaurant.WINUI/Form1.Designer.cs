@@ -44,30 +44,33 @@
             // 
             // btnYokEt
             // 
-            this.btnYokEt.Location = new System.Drawing.Point(436, 494);
+            this.btnYokEt.Location = new System.Drawing.Point(582, 494);
             this.btnYokEt.Name = "btnYokEt";
-            this.btnYokEt.Size = new System.Drawing.Size(140, 37);
+            this.btnYokEt.Size = new System.Drawing.Size(259, 37);
             this.btnYokEt.TabIndex = 13;
             this.btnYokEt.Text = "Yok Et";
             this.btnYokEt.UseVisualStyleBackColor = true;
+            this.btnYokEt.Click += new System.EventHandler(this.btnYokEt_Click);
             // 
             // btnGuncelle
             // 
-            this.btnGuncelle.Location = new System.Drawing.Point(229, 494);
+            this.btnGuncelle.Location = new System.Drawing.Point(294, 494);
             this.btnGuncelle.Name = "btnGuncelle";
-            this.btnGuncelle.Size = new System.Drawing.Size(140, 37);
+            this.btnGuncelle.Size = new System.Drawing.Size(253, 37);
             this.btnGuncelle.TabIndex = 14;
             this.btnGuncelle.Text = "Guncelle";
             this.btnGuncelle.UseVisualStyleBackColor = true;
+            this.btnGuncelle.Click += new System.EventHandler(this.btnGuncelle_Click);
             // 
             // btnSil
             // 
             this.btnSil.Location = new System.Drawing.Point(15, 494);
             this.btnSil.Name = "btnSil";
-            this.btnSil.Size = new System.Drawing.Size(140, 37);
+            this.btnSil.Size = new System.Drawing.Size(238, 37);
             this.btnSil.TabIndex = 15;
             this.btnSil.Text = "Sil";
             this.btnSil.UseVisualStyleBackColor = true;
+            this.btnSil.Click += new System.EventHandler(this.btnSil_Click);
             // 
             // btnSilinenler
             // 
@@ -77,6 +80,7 @@
             this.btnSilinenler.TabIndex = 10;
             this.btnSilinenler.Text = "Silinenler";
             this.btnSilinenler.UseVisualStyleBackColor = true;
+            this.btnSilinenler.Click += new System.EventHandler(this.btnSilinenler_Click);
             // 
             // btnModified
             // 
@@ -86,6 +90,7 @@
             this.btnModified.TabIndex = 11;
             this.btnModified.Text = "Guncellenenler";
             this.btnModified.UseVisualStyleBackColor = true;
+            this.btnModified.Click += new System.EventHandler(this.btnModified_Click);
             // 
             // btnAktifler
             // 
@@ -95,6 +100,7 @@
             this.btnAktifler.TabIndex = 12;
             this.btnAktifler.Text = "Aktifler";
             this.btnAktifler.UseVisualStyleBackColor = true;
+            this.btnAktifler.Click += new System.EventHandler(this.btnAktifler_Click);
             // 
             // txtAciklama
             // 
@@ -115,20 +121,22 @@
             this.bnKategoriEkle.Location = new System.Drawing.Point(853, 101);
             this.bnKategoriEkle.Margin = new System.Windows.Forms.Padding(6);
             this.bnKategoriEkle.Name = "bnKategoriEkle";
-            this.bnKategoriEkle.Size = new System.Drawing.Size(208, 48);
+            this.bnKategoriEkle.Size = new System.Drawing.Size(225, 48);
             this.bnKategoriEkle.TabIndex = 6;
             this.bnKategoriEkle.Text = "Kategori Ekle";
             this.bnKategoriEkle.UseVisualStyleBackColor = true;
+            this.bnKategoriEkle.Click += new System.EventHandler(this.bnKategoriEkle_Click);
             // 
             // btnKategoriler
             // 
             this.btnKategoriler.Location = new System.Drawing.Point(853, 15);
             this.btnKategoriler.Margin = new System.Windows.Forms.Padding(6);
             this.btnKategoriler.Name = "btnKategoriler";
-            this.btnKategoriler.Size = new System.Drawing.Size(208, 48);
+            this.btnKategoriler.Size = new System.Drawing.Size(225, 48);
             this.btnKategoriler.TabIndex = 7;
             this.btnKategoriler.Text = "Kategoriler";
             this.btnKategoriler.UseVisualStyleBackColor = true;
+            this.btnKategoriler.Click += new System.EventHandler(this.btnKategoriler_Click);
             // 
             // dgvKategoriler
             // 
@@ -141,12 +149,13 @@
             this.dgvKategoriler.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvKategoriler.Size = new System.Drawing.Size(826, 450);
             this.dgvKategoriler.TabIndex = 5;
+            this.dgvKategoriler.Click += new System.EventHandler(this.dgvKategoriler_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1123, 540);
+            this.ClientSize = new System.Drawing.Size(1097, 540);
             this.Controls.Add(this.btnYokEt);
             this.Controls.Add(this.btnGuncelle);
             this.Controls.Add(this.btnSil);
@@ -160,6 +169,7 @@
             this.Controls.Add(this.dgvKategoriler);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvKategoriler)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

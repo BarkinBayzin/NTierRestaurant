@@ -9,6 +9,15 @@ namespace NTierRestaurant.MODEL.Concrete
 {
     public class Category:BaseEntity
     {
+        public Category()
+        {
+
+        }
+        public Category(string name, string description)
+        {
+            Description = description;
+            Name = name;
+        }
         public string Name { get; set; }
         public string Description { get; set; }
 
