@@ -62,7 +62,6 @@ namespace NTierRestaurant.WINUI
         private void btnModified_Click(object sender, EventArgs e)
         {
             dgvKategoriler.DataSource = _cRep.GetModifieds();
-
         }
 
         private void btnSilinenler_Click(object sender, EventArgs e)
@@ -72,7 +71,21 @@ namespace NTierRestaurant.WINUI
 
         private void btnGuncelle_Click(object sender, EventArgs e)
         {
-            
+            if (modify == null)
+            {
+                MessageBox.Show("Lütfen güncellemek istediğiniz veriyi seçiniz..!");
+                return;
+            }
+
+            if (!TextControl()) return;
+
+            modify.Name = txtIsim.Text;
+            modify.Description = txtAciklama.Text;
+            _cRep.Update(modify);
+
+            modify = null;
+            KategorileriListele();
+
         }
 
         private void btnYokEt_Click(object sender, EventArgs e)

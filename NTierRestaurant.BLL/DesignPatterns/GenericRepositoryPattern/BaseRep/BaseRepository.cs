@@ -67,6 +67,8 @@ namespace NTierRestaurant.BLL.DesignPatterns.GenericRepositoryPattern.BaseRep
             T guncellenecek = Find(item.Id);//Burada parametremizin ID'sinden güncellenecek veriyi buldum.
             //db.Entry => bu ifade, Database'inizde var olan bir bilgi için güncelleme yapılağını belirtir.
             _db.Entry(guncellenecek).CurrentValues.SetValues(item);//Bu ifadede dediğimiz şey, db'ye bir güncelleme girişi var. Bu güncellenecek nesnesi üzerindne yapılacak. Yakalanan nesnenin mevcut değerleri(genüz mdeğiştirilmemiş olan SQL'deki orjinal değerleri) item'dakilerle (C# tarafında değişik olan bilgilerler) set edilsin..(ayarlansın)
+            item.ModifiedDate = DateTime.Now;
+            item.Status = Status.Modified;
             Save();
         }
 
